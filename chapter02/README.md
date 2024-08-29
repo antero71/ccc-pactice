@@ -1,3 +1,5 @@
+# Calculator
+
 The calculator.cpp code contains the solutions for the following tasks.
 
 Create an `enum class Operation` that has value Add, Subtract, Multiply, and Divide.
