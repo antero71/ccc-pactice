@@ -1,3 +1,6 @@
+// The code is compiled on a Mac with the following command: 
+// clang++ --std=c++11 calculator.cpp -o calculator
+ 
 #include <cstdio>
 #include <cstddef>
 
