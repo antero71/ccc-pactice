@@ -2,6 +2,7 @@
 #include <chrono>
 #include <ctime>
 #include <cstdio>
+#include <thread> 
 
 struct TimerClass{
 
@@ -14,7 +15,7 @@ TimerClass(){
   auto end = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - timestamp);
   std::cout << "Time difference: " << duration.count() << " microseconds" << std::endl;
-  std::cout << "Time difference: " << duration.count()/1000 << " milliseconds" << std::endl;
+  std::cout << "Time difference: " << duration.count()/1000.F << " milliseconds" << std::endl;
   std::cout << "Time difference: " << duration.count()/1000.F/1000.0 << " seconds" << std::endl;
 }
 
@@ -29,6 +30,8 @@ private:
 
 int main(){
   auto timeClass = new TimerClass{};
-  for(long i; i < 9000000000;i++);
+  auto copy_timeClass { timeClass };
+  std::this_thread::sleep_for(std::chrono::seconds(2));
   delete timeClass;
+  delete copy_timeClass;
 }
