@@ -32,14 +32,31 @@ TimerClass& operator=(const TimerClass& other){
   return *this;
 }
 
+  // Move-constructor
+    TimerClass(TimerClass&& other) noexcept
+    : timestamp{std::move(other.timestamp)} {
+    
+        other.timestamp = std::chrono::time_point<std::chrono::high_resolution_clock>{}; // Nollataan toisen objektin timestamp
+    }
+
+    // Move-assignment
+    TimerClass& operator=(TimerClass&& other) noexcept {
+        if (this == &other) {
+            return *this;
+        }
+        timestamp = std::move(other.timestamp);
+        other.timestamp = std::chrono::time_point<std::chrono::high_resolution_clock>{}; // Nollataan toisen objektin timestamp
+        return *this;
+    }
+
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> timestamp;
 };
 
 int main(){
   auto timeClass = new TimerClass{};
-  auto copy_timeClass = new TimerClass{ *timeClass };
+  auto moved_timeClass = std::move(*timeClass);  // Siirretään timeClass -> moved_timeClass
+    
   std::this_thread::sleep_for(std::chrono::seconds(2));
   delete timeClass;
-  delete copy_timeClass;
 }
