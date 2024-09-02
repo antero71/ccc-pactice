@@ -51,6 +51,7 @@ TimerClass& operator=(const TimerClass& other){
 
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> timestamp;
+    char name[20];
 };
 
 int main(){
