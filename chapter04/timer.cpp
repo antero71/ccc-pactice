@@ -19,9 +19,17 @@ TimerClass(){
   std::cout << "Time difference: " << duration.count()/1000.F/1000.0 << " seconds" << std::endl;
 }
 
-TimerClass(const TimerClass& other)
-: timestamp{ other.timestamp}{
+TimerClass(const TimerClass& other){
+ timestamp = other.timestamp;
+}
 
+TimerClass& operator=(const TimerClass& other){
+  if ( this == &other){
+    return *this;
+  }
+
+  timestamp = other.timestamp;
+  return *this;
 }
 
 private:
@@ -30,7 +38,7 @@ private:
 
 int main(){
   auto timeClass = new TimerClass{};
-  auto copy_timeClass { timeClass };
+  auto copy_timeClass = new TimerClass{ *timeClass };
   std::this_thread::sleep_for(std::chrono::seconds(2));
   delete timeClass;
   delete copy_timeClass;
