@@ -7,8 +7,12 @@
 struct TimerClass{
 
 
-TimerClass(){
+TimerClass(char name[]){
   timestamp = std::chrono::high_resolution_clock::now();
+  if(strlen(name)>19){
+    throw std::runtime_error{"name lenght should be less than 20"};
+  }
+  this.name=name;
 }
 
 ~TimerClass(){
