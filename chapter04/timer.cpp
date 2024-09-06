@@ -82,11 +82,20 @@ private:
     size_t max_length{20};
 };
 
+int test(TimerClass &timerclass){
+  auto i{.0F};
+  for(; i < 1000000; i++){
+    i+=4/1.1;
+  }
+  return i;
+}
+
 int main() {
     auto timeClass = TimerClass{"first timer"};
     auto timeClass2 = TimerClass("second timer");
     auto timeClass_copy{timeClass};  // Copy the object
     auto timeClass_move{std::move(timeClass)};  // Move the object
     auto timeClass_copy2{ timeClass2};
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::cout << "return value: " << test(timeClass) << std::endl;
+    //std::this_thread::sleep_for(std::chrono::seconds(2));
 }
